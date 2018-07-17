@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block content %}
+  {{ super() }}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-5">
+        <div>
+          <h4 class="text-monospace text-center mt-4">Your profile </h4>
+          <div class="card mt-4" style="background-color: rgba(0, 209, 255, 0.1);">
+            <div class="card-body">
+              <h4 class="card-title">{{ doctor.persona.nome | capitalize }} {{ doctor.persona.cognome | capitalize}}</h5>
+              <p class="card-text"><strong>Mail address:</strong> {{ doctor.persona.email.indirizzo }}</p>
+              <p class="card-text"><strong>Phone number:</strong> {{ doctor.persona.telefono.numero}}</p>
+              <p class="card-text"><strong>Document:</strong> {{ doctor.persona.documento.codice}}</p>
+              <p class="card-text"><strong>Home address:</strong> {{ doctor.persona.indirizzo.strada}} , {{ doctor.persona.indirizzo.cap}}</p>
+              <h6 class="card-subtitle mb-2 text-muted">Medical office</h6>
+              <p class="card-text"><strong>Office addess:</strong> {{ doctor.stud_leg.indirizzo.strada}} , {{ doctor.stud_leg.indirizzo.cap}}</p>
+              <p class="card-text"><strong>Work start:</strong> {{ doctor.stud_leg.orario_inizio.hour }}:{{ doctor.stud_leg.orario_inizio.minute }} <strong> - Work end:</strong> {{ doctor.stud_leg.orario_fine.hour}}:{{ doctor.stud_leg.orario_fine.minute}}</p>
+              <p class="card-text"><strong>From:</strong> {{ doctor.stud_leg.da_giorno | capitalize}} <strong>- To:</strong> {{ doctor.stud_leg.a_giorno | capitalize}}</p>
+              <a class="btn btn-primary mt-1" href={{ url_for('edit_profile', username = doctor.persona.username) }} method='GET'>Edit your profile</a>
+              <a href={{ url_for('add_patient', m_username = doctor.persona.username) }} method='GET' class="btn btn-success mt-1">Add a patient</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="col-sm-7">
+        <ul class="list-group">
+            <h4 class="text-monospace text-center mt-4">Your patient </h4>
+            {% for p in users %}
+            <li class="" style="list-style-type: none;">
+              <div class="card mt-4" style="background-color: rgba(0, 180, 197, 0.3);">
+                <div class="card-body">
+                  <h4 class="card-title">{{ p.persona.nome | capitalize}} {{ p.persona.cognome | capitalize}}</h5>
+                  <p class="card-text"><strong>Mail address:</strong> {{ p.persona.email.indirizzo }}</p>
+                  <p class="card-text"><strong>Phone number:</strong> {{ p.persona.telefono.numero}}</p>
+                  <p class="card-text"><strong>Document:</strong> {{ p.persona.documento.codice}}</p>
+                  <p class="card-text"><strong>Home address:</strong> {{ p.persona.indirizzo.strada}} , {{ p.persona.indirizzo.cap}}</p>
+                  <p class="card-text"><strong>Birth place:</strong> {{ p.persona.luogo_nascita}}</p>
+                  <p class="card-text"><strong>Birth date:</strong> {{ p.persona.data_nascita}}</p>
+                  <a href={{ url_for('info', p_username = p.persona.username) }} method='GET' class="btn btn-primary mt-1">Go to his profile</a>
+                  <a href={{ url_for('remove_patient', p_username = p.persona.username) }} method='POST' class="btn btn-danger mt-1">Remove</a>
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+        </ul>
+      </div>
+
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block footer %}
+  {{ super() }}
+
+{% endblock %}

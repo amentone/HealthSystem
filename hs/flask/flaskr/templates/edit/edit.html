@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block content %}
+  {{ super() }}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+          <div class="card mt-4" style="background-color: rgba(0, 209, 255, 0.1);">
+            <div class="card-body">
+              <h4 class="card-title text-center mt-2">Edit your profile</h4>
+              <form role="form" action= {{ url_for('edit_profile', username = user.persona.username) }} method="post">
+                <h5 class="text-center" style="color: grey;">Registry</h5>
+                {% for message in get_flashed_messages() %}
+                  <div class="alert alert-warning mx-auto">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                  </div>
+                {% endfor %}
+                <div class="form-group">
+                  <label for="email-form">Email address</label>
+                  <input type="email" name="form-email" class="form-control" id="email-form" value={{ user.persona.email.indirizzo }}>
+                </div>
+                <div class="form-group">
+                  <label for="pass-form">New password</label>
+                  <input type="password" name="form-pass" class="form-control" id="pass-form" placeholder="New password...">
+                </div>
+                <div class="form-group">
+                  <label for="pass-form">Confirm password</label>
+                  <input type="password" name="conf-form-pass" class="form-control" id="conf-pass-form" placeholder="Repeat password...">
+                </div>
+                <div class="form-group">
+                  <label for="phonenumb-form">Phone number</label>
+                  <input type="text" name="form-phonenumb" class="form-control" id="phonenumb-form" value={{ user.persona.telefono.numero }}>
+                </div>
+                <div class="form-group">
+                  <label for="streetaddr-form">Street address</label>
+                  <input type="text" name="form-street-addr" class="form-control" id="streetaddr-form"  value="{{ user.persona.indirizzo.strada }}">
+                </div>
+                <div class="form-group">
+                  <label for="zipcode-form">Zip code</label>
+                  <input type="number" name="form-zip-code" class="form-control" id="zipcode-form" value={{ user.persona.indirizzo.cap }} min="0" max="90000">
+                </div>
+                {% block form %}{% endblock %}
+              </form>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

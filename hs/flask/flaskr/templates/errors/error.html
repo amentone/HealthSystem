@@ -1,0 +1,17 @@
+{% extends "base.html"%}
+{% block title %}{% endblock %}
+
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block content %}
+  {{ super() }}
+
+  <div class="page-header text-center mt-4">
+    <hgroup>
+      <h1>{% block h1 %}{% endblock %}</h1>
+    </hgroup>
+  </div>
+
+{% endblock %}

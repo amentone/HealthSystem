@@ -1,0 +1,15 @@
+{% extends "edit/edit.html" %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block content %}
+  {{ super() }}
+{%endblock%}
+{%block form%}
+
+<div class="text-center">
+  <a href={{ url_for('patient', _username = user.persona.username) }} class="btn btn-danger">Cancel</a>
+  <button type="submit" class="btn btn-success">Confirm</button>
+</div>
+{%endblock%}

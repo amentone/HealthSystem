@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block content %}
+  {{ super() }}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+          <div class="card mt-4" style="background-color: rgba(0, 209, 255, 0.1);">
+            <div class="card-body">
+              <h4 class="card-title text-center mt-2">Register patient</h4>
+              <form role="form" action={{ url_for('add_patient', m_username = m_username) }} method="post">
+                {% for message in get_flashed_messages() %}
+                  <div class="alert alert-warning mx-auto">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                  </div>
+                {% endfor %}
+                <div class="form-group">
+                  <label for="name-form">Name</label>
+                  <input type="text" name="form-name" class="form-control" id="name-form" placeholder="Patient name...">
+                </div>
+                <div class="form-group">
+                  <label for="surname-form">Surname</label>
+                  <input type="text" name="form-surname" class="form-control" id="surname-form" placeholder="Patient surname...">
+                </div>
+
+                <div class="form-group">
+                  <label for="email-form">Email address</label>
+                  <input type="email" name="form-email" class="form-control" id="email-form" placeholder="name@example.com">
+                </div>
+
+                <div class="form-group">
+                  <label for="user-form">Username</label>
+                  <input type="text" name="form-user" class="form-control" id="user-form" placeholder="Patient username...">
+                </div>
+
+                <div class="form-group">
+                  <label for="pass-form">Password</label>
+                  <input type="password" name="form-pass" class="form-control" id="pass-form" placeholder="Patient password...">
+                </div>
+
+                <div class="form-group">
+                  <label for="perscode-form">Personal social code</label>
+                  <input type="text" name="form-perscode" class="form-control" id="perscode-form" placeholder="Patient personal social code...">
+                </div>
+
+                <div class="form-group">
+                  <label for="phonenumb-form">Phone number</label>
+                  <input type="text" name="form-phonenumb" class="form-control" id="phonenumb-form" placeholder="Patient phone number...">
+                </div>
+
+                <div class="form-group">
+                  <label for="choose-document">Choose document</label>
+                  <select name="form-type-doc" multiple class="form-control" id="choose-document">
+                    <option>Passport</option>
+                    <option>Driver card</option>
+                    <option>Identity document</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="document-form">Document code</label>
+                  <input type="text" name="form-document-code" class="form-control" id="document-form" placeholder="Patient document code...">
+                </div>
+
+                <div class="form-group">
+                  <label for="streetaddr-form">Street address</label>
+                  <input type="text" name="form-street-addr" class="form-control" id="streetaddr-form" placeholder="Patient street address...">
+                </div>
+
+                <div class="form-group">
+                  <label for="zipcode-form">Zip code</label>
+                  <input type="number" name="form-zip-code" class="form-control" id="zipcode-form" placeholder="Patient zip code...">
+                </div>
+
+                <div class="form-group">
+                  <label for="bplace-form">Birth place</label>
+                  <input type="text" name="form-bplace" class="form-control" id="bplace-form" placeholder="Patient birth place...">
+                </div>
+
+                <div class="form-group">
+                  <label for="bdate-form">Birth date</label>
+                  <input type="date" name="form-bdate" class="form-control" id="bdate-form" placeholder="Patient birth date...">
+                </div>
+
+                <div class="text-center">
+                  <a href={{ url_for('doctor', _username = m_username) }} class="btn btn-danger">Cancel</a>
+                  <button type="submit" class="btn btn-success">Confirm</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block footer %}
+  {{ super() }}
+
+{% endblock %}

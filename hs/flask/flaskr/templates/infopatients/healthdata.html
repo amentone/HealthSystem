@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Health Data - info for {{ data.username }}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+
+{% block content %}
+  {{ super() }}
+
+  <div class="container mb-5">
+    <div class="row">
+      <div class="col-md-6 mx-auto mt-3">
+        <div class="mt-2">
+          <h4 class="text-monospace text-center mt-4">General information</h4>
+          {% for d in data %}
+          <div class="card mt-4 mx-auto" style="background-color: rgba(0, 209, 255, 0.1);">
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">User</h6>
+              <p class="card-text"><strong>Username: </strong> {{ d['username'] }}</p>
+              <h6 class="card-subtitle mb-2 text-muted">Messagge</h6>
+              <p class="card-text"><strong>How i feel:</strong> {{  d['come_mi_sento'] }} </p>
+              <h6 class="card-subtitle mb-2 text-muted">Other information</h6>
+              <p class="card-text"><strong>Fever:</strong> {{  d['febbre'] }} </p>
+              <p class="card-text"><strong>Flue:</strong> {{  d['raffreddore'] }} </p>
+              <p class="card-text"><strong>Headache:</strong> {{  d['mal_di_testa'] }} </p>
+              <p class="card-text"><strong>Sore throat:</strong> {{  d['mal_di_gola'] }} </p>
+              <p class="card-text"><strong>Swelling:</strong> {{  d['gonfiore'] }} </p>
+              <p class="card-text"><strong>Stomach ache:</strong> {{  d['bruciore_stomaco'] }} </p>
+              <p class="card-text"><strong>Panico:</strong> {{  d['panico'] }} </p>
+
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<br><br><br><br>
+  {% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block content %}
+  {{ super() }}
+  <div class="container">
+    <div class="row">
+      <div class="col mx-auto">
+          <div class="card mt-4" style="background-color: rgba(0, 209, 255, 0.1);">
+            <div class="card-body">
+              <h4 class="card-title text-center mt-2"></h4>
+                <h5 class="text-center" style="color: grey;">More informations: </h5>
+                <div>
+                  Health system is an University (Università degli Studi di Napoli Parthenope) project created by Vittorio Fones and Antonio Mentone (by an idea of Antonio Mentone).
+                  The main purposes is to increase the comunication between doctors and patients.</br></br>
+
+                  ### How does it work</br>
+                  * Inside docker containers are working together flask, mongo, nginx, postgres</br>
+                  * nginx is reverse proxying to flask all request and is serving only static files</br>
+                  * flask is creating web page dinamically with Jinja2</br>
+                  * after a successful login, information are queried from postgres</br>
+                  * mongo is used for storing information about biometrics and health purposes</br>
+
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

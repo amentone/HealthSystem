@@ -1,0 +1,11 @@
+{% extends "errors/error.html" %}
+
+{% block title %}Unauthorized{% endblock %}
+
+{% block h1 %}
+  Unauthorized - You need a permission<br>
+  Get a login <a href= {{ url_for('login') }} method='GET'>here</a>
+
+
+
+{% endblock %}

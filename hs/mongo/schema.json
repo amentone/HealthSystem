@@ -1,0 +1,58 @@
+""" biometrics collection """
+[
+    {
+        "username" : "",
+
+        "steps" : [{
+            "value" : "",
+            "timeStamp" : ""
+        }],
+
+        "caloriesBurned" : [{
+            "value" : "",
+            "timeStamp" : ""
+        }],
+
+        "distanceTraveled" : [{
+            "value" : "",
+            "timeStamp" : ""
+        }],
+
+        "BPM" : [{
+            "pulse" : "",
+            "timeStamp" : ""
+        }],
+
+        "sleepSession" : {
+            "begin" : "",
+            "end" : ""
+        },
+
+        "date" : ""
+    }
+]
+
+""" health_purpose collection """
+[
+    {
+      "username" : "",
+
+      "come_mi_sento" : "",
+
+      "febbre" : "",
+
+      "raffreddore" : "",
+
+      "mal_di_testa" : "",
+
+      "mal_di_gola" : "",
+
+      "bruciore_stomaco" : "",
+
+      "gonfiore" : "",
+
+      "panico" : "",
+
+      "date" : ""
+    }
+]

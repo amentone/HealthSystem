@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}Insert biometrics information{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block content %}
+  {{ super() }}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card mt-4" style="background-color: rgba(0, 209, 255, 0.1);">
+          <div class="card-body">
+            <h4 class="card-title text-center mt-2">Biometrics information</h4>
+            <form role="form" method="post">
+              {% for message in get_flashed_messages() %}
+                <div class="alert alert-warning mx-auto">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  {{ message }}
+                </div>
+              {% endfor %}
+
+              <div class="d-none form-group">
+                <input  class="d-none "name="username" value={{ p_username }}>
+              </div>
+
+              <div class="form-group">
+                <label>How many steps have you done today?</label>
+                <input type="number" name="steps"  value=1000 class="form-control">
+              </div>
+              <div class="form-group">
+                <label>How many calories have you burned?</label>
+                <input type="number" name='caloriesBurned'  value=1000 class="form-control">
+              </div>
+              <div class="form-group">
+                <label>BPM?</label>
+                <input type="number" name='BPM'  value=100 class="form-control">
+              </div>
+
+              <div class="row">
+              <div class="form-group col-md-6">
+                <h5 for="time-form" class="text-center">Sleep start </h5>
+                <div class="row">
+                  <div class=" col-md-6">
+                    <h6 class="mt-1">Hour</h6>
+                    <input type="number" name="beginSession-h" class="form-control" id="time-form" value="00" placeholder="Hour" min="0" max="23">
+                  </div>
+                  <div class="col-md-6">
+                    <h6 class="mt-1">Minute</h6>
+                    <input type="number" name="beginSession-m" class="form-control" id="time-form" value="00" placeholder="Minute" min="0" max="59">
+                  </div>
+                </div>
+              </div>
+                <div class="form-group col-md-6">
+                  <h5 for="wend-form" class="text-center">Sleep end</h5>
+                  <div class="row">
+                    <div class=" col-md-6">
+                      <h6 class="mt-1">Hour</h6>
+                      <input type="number" name="endSession-h" class="form-control" id="time-form" value="07" placeholder="Hour" min="0" max="23">
+                    </div>
+                    <div class="col-md-6">
+                      <h6 class="mt-1">Minute</h6>
+                      <input type="number" name="endSession-m" class="form-control" id="time-form" value="00" placeholder="Minute"  min="0" max="59">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-success">Confirm</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block footer %}
+  {{ super() }}
+
+{% endblock %}

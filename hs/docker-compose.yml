@@ -1,0 +1,72 @@
+version: '3'
+
+services:
+    postgres:
+        build: ./postgres
+        container_name: postgres
+        ports:
+            - 2345:5432
+        networks:
+            - sql
+        environment:
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+
+    mongo:
+        build: ./mongo
+        container_name: mongo
+        ports:
+            - 27017:27017
+        networks:
+            - nosql
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: admin
+            MONGO_INITDB_ROOT_PASSWORD: passwd
+            MONGO_INITDB_DATABASE: healthsystem
+
+    flask:
+        build: ./flask
+        container_name: flask
+        volumes:
+            - ./flask:/usr/src/app
+        ports:
+            - 5000:5000
+        networks:
+            - sql
+            - nosql
+            - web
+        environment:
+            - FLASK_APP=flaskr
+            - FLASK_ENV=development
+            - SECRETKEY=${SECRETKEY}
+            - MAIL_USERNAME=${MAIL_USERNAME}
+            - MAIL_PASSWORD=${MAIL_PASSWORD}
+            - MAPS=${MAPS}
+            - GAPI=${GAPI}
+        depends_on:
+            - mongo
+            - postgres
+        links:
+            - mongo
+            - postgres
+        command: gunicorn flaskr:app -b 0.0.0.0:5000 --reload --log-level=DEBUG
+
+    nginx:
+        build: ./nginx
+        container_name: nginx
+        ports:
+            - 80:80
+            - 443:443
+        #volumes:
+           #- /etc/letsencrypt:/etc/letsencrypt
+        networks:
+            - web
+        depends_on:
+            - flask
+        links:
+            - flask
+
+networks:
+    sql:
+    nosql:
+    web:

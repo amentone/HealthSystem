@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - info for {{ patient.username }}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+
+{% block content %}
+  {{ super() }}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-5">
+        <h4 class="text-monospace text-center mt-5">Patient registry</h4>
+        <div class="card mt-4" style="background-color: rgba(0, 209, 255, 0.1);">
+          <div class="card-body">
+            <h4 class="card-title">{{ patient.nome | capitalize }} {{ patient.cognome | capitalize}}</h5>
+            <p class="card-text" ><strong>Mail address:</strong><a href="mailto:{{patient.email.indirizzo}}"> {{ patient.email.indirizzo }}</a></p>
+            <p class="card-text"><strong>Phone number:</strong> {{ patient.telefono.numero}}</p>
+            <p class="card-text"><strong>Document:</strong> {{ patient.documento.codice}}</p>
+            <p class="card-text"><strong>Home address:</strong> {{ patient.indirizzo.strada}} , {{ patient.indirizzo.cap}}</p>
+          </div>
+        </div>
+
+        <h4 class="text-monospace text-center mt-5">Patient informations</h4>
+        <div class="card mt-4" style="background-color: rgba(0, 209, 255, 0.1);">
+          <div class="card-body">
+            <h4 class="card-title">Select data</h5>
+              <form role="form" action="{{ url_for('request_info', username = patient.username) }}" method="POST">
+                <div class="form-group">
+                  <select name="data" class="form-control">
+                    {% for x in hpdate %}
+                      <option value={{ x }} {% if loop.last %} selected {% endif %}> {{ x }} </option>
+                    {% endfor %}
+                  </select>
+
+
+                  <div class="row mt-2 justify-content-center">
+                    <div class="form-check form-check-inline">
+                      <label class="form-check-label input-group-text">
+                        <input class="form-check-input" type="radio" name="dataselected" id="inlineRadio1" value="biometrics" checked="checked">Biometrics
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <label class="form-check-label input-group-text">
+                        <input class="form-check-input" type="radio" name="dataselected" id="inlineRadio2" value="health_data"> Health Data
+                      </label>
+                    </div>
+
+                    <button type="submit"  method='post' class="btn btn-primary">Confirm</button>
+                  </div>
+
+                </div>
+              </form>
+
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="col-sm-7">
+        <ul class="list-group">
+            <h4 class="text-monospace text-center mt-5"> Prescriptions
+              <a id="presc-button" class="btn btn-success mt-1 mx-auto" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Add</a>
+            </h4>
+            <div class="collapse mt-1" id="collapseExample">
+              <form class="form-group" action= {{ url_for('add_prescr', id_patient = patient.id_persona ) }} method='POST'>
+                  <textarea class="form-control" name="TextPrescription" rows="3"></textarea>
+                  <input type="submit" class="btn btn-success mt-1 text-right">
+              </form>
+            </div>
+
+            {% for r in prescription %}
+             <li class="" style="list-style-type: none;">
+              <div class="card mt-4" style="background-color: rgba(0, 180, 197, 0.3);">
+                <div class="card-body">
+                  <p class="card-text"><strong>Date of issue:</strong> {{ r.data_emissione }}</p>
+                  <p class="card-text">{{ r.campo }}</p>
+                  <a href= {{ url_for('notify', id_prescription = r.id_ricetta) }} method='POST' class="btn btn-primary mt-1">Notify</a>
+                  <a href= {{ url_for('remove_prescr', id_prescription = r.id_ricetta) }} method='POST' class="btn btn-danger mt-1">Remove</a>
+                </div>
+              </div>
+             </li>
+            {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function(){
+      $("#presc-button").click(function(){
+        if($(this).text() == 'Add')
+        {
+          $(this).removeClass("btn-success");
+          $(this).text("Cancel");
+          $(this).addClass("btn-danger");
+        }
+        else
+        {
+          $(this).removeClass("btn-danger");
+          $(this).text("Add");
+          $(this).addClass("btn-success");
+        }
+      });
+    });
+  </script>
+  {% endblock %}

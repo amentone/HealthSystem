@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block title %}Insert health information{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block content %}
+  {{ super() }}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+          <div class="card mt-4" style="background-color: rgba(0, 209, 255, 0.1);">
+            <div class="card-body">
+              <h4 class="card-title text-center mt-2">Health information</h4>
+              <form role="form"  method="post">
+                {% for message in get_flashed_messages() %}
+                  <div class="alert alert-warning mx-auto">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                  </div>
+                {% endfor %}
+                <div class="d-none form-group">
+                  <input  class="d-none "name="username" value={{ p_username }}>
+                </div>
+
+                <div class="form-group">
+                  <label>Come ti senti?</label>
+                  <input type="text" name="come_mi_sento" class="form-control">
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Hai la febbre?</label>
+                      <select name="febbre"  class="form-control">
+                        <option value="False" selected>False</option>
+                        <option value="True">True</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Hai il raffreddore?</label>
+                      <select name="raffreddore" class="form-control">
+                        <option value="False" selected>False</option>
+                        <option value="True">True</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Hai il mal di testa?</label>
+                      <select name="mal_di_testa" class="form-control">
+                        <option value="False" selected>False</option>
+                        <option value="True">True</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Hai il mal di gola?</label>
+                      <select name="mal_di_gola"  class="form-control">
+                        <option value="False" selected>False</option>
+                        <option value="True">True</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Hai un bruciore di stomaco?</label>
+                      <select name="bruciore_stomaco"  class="form-control">
+                        <option value="False" selected>False</option>
+                        <option value="True">True</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Hai una sensazione di gonfiore?</label>
+                      <select name="gonfiore"  class="form-control">
+                        <option value="False" selected>False</option>
+                        <option value="True">True</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Hai avuto un attacco di panico?</label>
+                      <select name="panico"  class="form-control">
+                        <option value="False" selected>False</option>
+                        <option value="True">True</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-none form-group">
+                  <input type="text" name="date" value={{ current_date }}>
+                </div>
+
+                <div class="text-center">
+                  <a href={{ url_for('patient', _username = p_username) }} class="btn btn-danger">Cancel</a>
+                  <button type="submit" id="submit" class="btn btn-success">Confirm</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block footer %}
+  {{ super() }}
+
+{% endblock %}

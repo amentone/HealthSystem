@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Prescription - info for {{ prescription[0].paziente.persona.username }}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+
+{% block content %}
+  {{ super() }}
+
+  <div class="col-md-6 mx-auto">
+    <ul class="list-group">
+        <h4 class="text-monospace text-center mt-5"> Prescriptions</h4>
+
+        {% for r in prescription %}
+         <li class="" style="list-style-type: none;">
+          <div class="card mt-4" style="background-color: rgba(0, 180, 197, 0.3);">
+            <div class="card-body">
+              <p class="card-text"><strong>Date of issue:</strong> {{ r.data_emissione }}</p>
+              <p class="card-text">{{ r.campo }}</p>
+            </div>
+          </div>
+         </li>
+        {% endfor %}
+    </ul>
+  </div>
+
+{% endblock %}
